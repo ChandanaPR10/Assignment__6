@@ -2,19 +2,28 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('git & clean') {
             steps {
-                echo 'Building..'
+                bat "rmdir /s /q Assignment__6"
+                bat "git clone https://github.com/ChandanaPR10/Assignment__6.git"
+                bat "mvn clean -f Assignment__6"
+            }
+        }
+        
+        stage('install') {
+            steps {
+             bat "mvn install -f Assignment__6"
+                
             }
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
+               bat "mvn test -f Assignment__6"
             }
         }
-        stage('Deploy') {
+        stage('package') {
             steps {
-                echo 'Deploying....'
+                bat "mvn package -f Assignment__6"
             }
         }
     }
