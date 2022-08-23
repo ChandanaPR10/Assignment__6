@@ -8,7 +8,6 @@ pipeline {
                 bat "mvn clean -f Assignment__6"
             }
         }
-        
         stage('install') {
             steps {
              bat "mvn install -f Assignment__6"
